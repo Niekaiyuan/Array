@@ -71,6 +71,7 @@ public class SparseArrayToFile {
             //将byte数组写入文件
             out.write(arr);
             System.out.println("写入成功！！！");
+            //释放资源
             out.close();
         }catch (Exception e){
             e.printStackTrace();
@@ -82,9 +83,10 @@ public class SparseArrayToFile {
      * @return 返回二维数组
      */
     private static int[][] toSimpleArray(){
-        //读取文件
+       
         int[][] chessArray = null;
         try{
+            //读取文件
             FileInputStream in = new FileInputStream("G:"+ File.separator+"datas" +File.separator+"data.txt");
             //创建缓冲区
             byte[] by = new byte[1024*8];
@@ -108,6 +110,7 @@ public class SparseArrayToFile {
                 }
             }
             System.out.println("读取到的字符串:" + str);
+            //释放资源
             in.close();
         }catch (Exception e){
             e.printStackTrace();
@@ -121,8 +124,9 @@ public class SparseArrayToFile {
         chessArray[1][2] = 1;
         chessArray[2][3] = 2;
         chessArray[5][3] = 1;
-        //将数组写入文件
+        //调用toSparse()方法 将数组写入文件
         SparseArrayToFile.toSparse(chessArray);
+        //调用toSimpleArray()方法 将数据还原成二维数组
         int[][] array = SparseArrayToFile.toSimpleArray();
         System.out.println("恢复后的原始的二维数组");
         for(int i = 0; i<array[0].length;i++){
